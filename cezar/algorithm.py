@@ -5,18 +5,14 @@ class CesarsAlgorithm(Algorithm):
         self.step = step
         self.alphabet = [chr(elem) for elem in range(ord('a'), ord('z') + 1)]
     def encryptMessage(self, originalMessage):
-        print("---------------------------")
-        print("####### ENCRYPTION ########")
-        print("---------------------------")
+        super().encryptMessage(originalMessage)
         message = originalMessage.lower()
         encryptedMessage = [self.alphabet[(ord(ch) - ord('a') + self.step) % len(self.alphabet)] if ch != " " else " " for ch in message]
         print("".join(encryptedMessage).upper())
         return "".join(encryptedMessage).upper()
 
     def decryptMessage(self, encryptedMessage):
-        print("---------------------------")
-        print("####### DECRYPTION ########")
-        print("---------------------------")
+        super().decryptMessage(encryptedMessage)
         message = encryptedMessage.lower()
         originalMessage = [self.alphabet[(ord(ch) - ord('a') - self.step) % len(self.alphabet)] if ch != " " else " " for ch in message]
         print("".join(originalMessage))

@@ -6,8 +6,12 @@ class Algorithm(ABC):
 
     @abstractmethod
     def encryptMessage(self, originalMessage):
-        pass
+        print("---------------------------")
+        print("####### ENCRYPTION ########")
+        print("---------------------------")
 
     @abstractmethod
     def decryptMessage(self, encryptedMessage):
-        pass
+        print("---------------------------")
+        print("####### DECRYPTION ########")
+        print("---------------------------")
