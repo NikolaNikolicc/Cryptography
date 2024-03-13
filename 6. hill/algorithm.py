@@ -12,11 +12,7 @@ class HillAlgorithm(Algorithm):
         super().encryptMessage(originalMessage)
         encryptedMessage = ""
         originalMessageList = [ord(ch) - ord("a") for ch in originalMessage]
-        for c in range(len(originalMessage)):
-            sum = 0
-            for c1 in range(len(originalMessage)):
-                sum += originalMessageList[c1] * self.keyMatrix[c1][c]
-            encryptedMessage += chr(sum % 26 + ord("a"))
+        encryptedMessage = np.matmul(originalMessageList, self.keyMatrix)
         return encryptedMessage
 
     def findInverseElement(self, elem):
