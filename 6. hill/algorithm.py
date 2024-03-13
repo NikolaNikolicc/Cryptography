@@ -12,8 +12,8 @@ class HillAlgorithm(Algorithm):
         super().encryptMessage(originalMessage)
         encryptedMessage = ""
         originalMessageList = [ord(ch) - ord("a") for ch in originalMessage]
-        encryptedMessage = np.matmul(originalMessageList, self.keyMatrix)
-        return encryptedMessage
+        encryptedMessage = np.matmul(originalMessageList, self.keyMatrix) % 26
+        return "".join(chr(ch + ord("a")) for ch in encryptedMessage)
 
     def findInverseElement(self, elem):
         elem = int(elem)
@@ -62,15 +62,22 @@ class HillAlgorithm(Algorithm):
 def main():
     key = [[3, 25, 4],[23, 6, 15],[13, 17, 21]]
     ha = HillAlgorithm(key)
-    encryptedMessage = ha.encryptMessage("you")
-    print("Encrypted Message: ", encryptedMessage)
-    fullMessage = "ekyimbhkxvnazyuelmvpbjvs"
-    fullDecryptedMessage = ""
+    # encryptedMessage = ha.encryptMessage("you")
+
+    fullMessage = "youhavetolearnhillcipher"
+    fullEncryptedMessage = ""
     for i in range(0, len(fullMessage), 3):
-        if(i + 2 < len(fullMessage)):
-            encryptedMessage = fullMessage[i:i+3]
+        partMessage = fullMessage[i: i + 3]
+        encryptedMessage = ha.encryptMessage(partMessage)
+        fullEncryptedMessage += encryptedMessage
+    print("Encrypted Message: ", fullEncryptedMessage)
+
+    fullDecryptedMessage = ""
+    for i in range(0, len(fullEncryptedMessage), 3):
+        if(i + 2 < len(fullEncryptedMessage)):
+            encryptedMessage = fullEncryptedMessage[i:i+3]
         else:
-            encryptedMessage = fullMessage[i:]
+            encryptedMessage = fullEncryptedMessage[i:]
         decryptedMessage = ha.decryptMessage(encryptedMessage)
         fullDecryptedMessage += decryptedMessage
     print("Decrypted Message: ", fullDecryptedMessage)
