@@ -67,7 +67,7 @@ class PlayfairAlgorithm(Algorithm):
                 cnt += 1
         self.matrix.append(lst)
 
-    '''preparing message for playfair algorithm (pairs of letters are generated)'''
+    '''preparing message for 3. playfair algorithm (pairs of letters are generated)'''
     def prepareMessage(self, message):
         message = "".join([ch if ch != " " else "" for ch in message])
         changed = True
